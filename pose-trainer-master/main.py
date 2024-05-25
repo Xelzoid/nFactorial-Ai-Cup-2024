@@ -59,9 +59,10 @@ def main():
                             # Use lower resolution for CPU only machines.
                             # If you're running the GPU version of OpenPose, or want to wait longer
                             # for higher quality, you can remove this line.
-                            '--net_resolution', '-1x176', 
+                            # '--net_resolution', '-1x176', 
                             '--video', os.path.join('..', args.video), 
-                            '--write_json', output_path])
+                            '--write_json', output_path,
+                            '--display', '0'])
 
             # Parse the pose JSON in the output path, and write it as a .npy file to the repository root folder.
             parse_sequence(output_path, '..')
@@ -97,7 +98,8 @@ def main():
                             # for higher quality, you can remove this line.
                             '--net_resolution', '-1x176', 
                             '--video', video_path, 
-                            '--write_json', output_path])
+                            '--write_json', output_path,
+                            '--display', '0'])
 
     # Evaluate the .npy file as a pose sequence for the specified exercise.
     elif args.mode == 'evaluate_npy':

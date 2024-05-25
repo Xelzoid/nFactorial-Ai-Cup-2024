@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'authentication/header.css' %}">
+    <link rel="stylesheet" href="{% static 'authentication/homepage.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/dashboard" class="header">
+            <p>Exercere</p>
+            <img src="{% static 'authentication/pfp.png' %}" alt="Profile">
+        </a>
+    </header>
+    <div>
+        <div>
+            <h2>Crafting the path for your fitness goals.</h2>
+            <p>Join Now</p>
+            <a href="/register">
+                <button>Register</button>
+            </a>
+        </div>
+        <div class="features">
+            <div class="feature-container">
+                <a href="/meal-prep">
+                    <p>Meal Prep</p>
+                    <div class="feature">
+                        <img src="{% static 'authentication/mealprep.png' %}" alt="Meal Plan">
+                    </div>
+                </a>
+            </div>
+            <div class="feature-container">
+                <a href="/fitness-plan">
+                    <p>Fitness Plan</p>
+                    <div class="feature">
+                        <img src="{% static 'authentication/fitnessplan.png' %}" alt="Fitness Plan">
+                    </div>
+                </a>
+            </div>
+            <div class="feature-container">
+                <a href="/form-correction">
+                    <p>Form Correction</p>
+                    <div class="feature">
+                        <img src="{% static 'authentication/fitness.png' %}" alt="Exercise">
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

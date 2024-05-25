@@ -4,7 +4,6 @@ from django.db.models import JSONField
 
 class UserData(models.Model):
     preferences = models.TextField()
-    fitnessgoal = models.TextField()
-    meal_plan = JSONField()
-
+    fitness_goals = models.TextField()
+    meal_plan = JSONField() 
         
