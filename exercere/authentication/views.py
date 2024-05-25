@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from . forms import CreateUserForm, LoginForm, MealPreferences
+from .forms import CreateUserForm, LoginForm, MealPreferences
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .mealprepmaker import GenerateMealPlan
+from .ai import GenerateMealPlan
+from .models import UserData
+from .serializers import MealPlanSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 def homepage(request):
     return HttpResponse("h")
 
@@ -44,4 +49,19 @@ def dashboard(request):
 
 @login_required(login_url="loginfunc")
 def mealplan(request):
-    pass
+    preferences = request.data.get('preferences')
+    fitness_goals = request.data.get('fitness_goals')
+    if not preferences or not fitness_goals:
+        return Response({"error": "Preferences and fitness goals are required."}, status=status.HTTP_400_BAD_REQUEST)
+
+    meal_plan_json = GenerateMealPlan(preferences, fitness_goals)
+
+    # Save the meal plan to the database
+    meal_plan = UserData.objects.create(
+        preferences=preferences,
+        fitness_goals=fitness_goals,
+        meal_plan=meal_plan_json
+    )
+
+    serializer = MealPlanSerializer(meal_plan)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)

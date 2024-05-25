@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from .models import MealPlan
+from .models import UserData
 
 class MealPlanSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MealPlan
+        model = UserData
         fields = ['preferences', 'fitness_goals', 'meal_plan']
