@@ -15,5 +15,10 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
-class MealPreferences(forms.Form):
-    preferences = forms.CharField()
+class PlanForm(forms.Form):
+    preferences = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Meal Preferences (Allergies, dislikes, etc.)'})
+    )
+    fitness_goals = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Fitness Goals (Weight loss, bulking, etc.)'})
+    )

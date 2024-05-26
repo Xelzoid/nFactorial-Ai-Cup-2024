@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'authentication/header.css' %}">
+    <link rel="stylesheet" href="{% static 'authentication/homepage.css' %}">
+    <link rel="stylesheet" href="{% static 'authentication/dashboard.css' %}">
+</head>
+<body>
+    <header>
+        <a href="/dashboard" class="header">
+            <p>Exercere</p>
+            <img src="{% static 'authentication/pfp.png' %}" alt="Profile">
+        </a>
+    </header>
+
+    <h2>Your Plans</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="create_meal_plan">Create Meal Plan</button>
+        <button type="submit" name="create_fitness_plan">Create Fitness Plan</button>
+    </form>
+
+    {% if meal_plan %}
+        <ul>
+            {% for day, meals in meal_plan.items %}
+                <li><strong>{{ day }}</strong></li>
+                <ul>
+                    {% for meal_type, meal in meals.items %}
+                        <li>{{ meal_type }}: {{ meal }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No meal plan available.</p>
+    {% endif %}
+
+    {% if fitness_plan %}
+        <h3>Fitness Plan</h3>
+        <ul>
+            {% for day, exercises in fitness_plan.items %}
+                <li><strong>{{ day }}</strong></li>
+                <ul>
+                    {% for exercise in exercises %}
+                        <li>{{ exercise.name }}: {{ exercise.sets }} sets, {{ exercise.reps }} reps</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

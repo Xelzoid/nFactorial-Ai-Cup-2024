@@ -1,6 +1,6 @@
 import google.generativeai as genai
 
-genai.configure(api_key="haha wont tell")  
+genai.configure(api_key="AIzaSyA111_pvb5CHtCPOVmYsnAPJ7Av37Ubi58")  
 model = genai.GenerativeModel('gemini-1.5-flash-latest')
 
 def GenerateMealPlan(preferences, fitnessgoals = 'be healthy'):
